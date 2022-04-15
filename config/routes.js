@@ -32,4 +32,6 @@ module.exports.routes = {
 	 ***************************************************************************/
 
 	'GET /book/': { action: 'book/get' },
+	'GET /review/': { action: 'review/get' },
+	'POST /review/': { action: 'review/add' },
 }
