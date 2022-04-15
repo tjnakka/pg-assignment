@@ -9,7 +9,7 @@ module.exports = {
 	tableName: 'book',
 	attributes: {
 		name: { type: 'string', required: true },
-		description: { type: 'string' },
+		description: { type: 'string', columnType: 'longtext' },
 		author: { type: 'string', required: true },
 		reviews: {
 			collection: 'review',
