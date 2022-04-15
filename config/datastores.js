@@ -46,6 +46,6 @@ module.exports.datastores = {
 		 *                                                                          *
 		 ***************************************************************************/
 		adapter: 'sails-mysql',
-		url: 'mysql://digicarduser:digicard@123456@localhost:3307/peoplegroove',
+		url: 'mysql://pguser:pg123456@pg-db:3306/peoplegroove',
 	},
 }
