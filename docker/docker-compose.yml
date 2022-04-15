@@ -36,20 +36,22 @@ services:
     networks: 
       - pg-network
 
-  # digicard1UI:
-  #   container_name: digicard1UI
-  #   image: digicard-ui
-  #   volumes: 
-  #     - /home/value3/srcfiles/digitalno1/digicard1_frontend/:/app/
-  #   ports: 
-  #     - 3000:3000
-  #   links:
-  #     - digicard1API
-  #   restart: unless-stopped 
-  #   depends_on:
-  #     - digicard1API
-  #   networks: 
-  #     - digicard1
+  pg-ui:
+    container_name: pg-ui
+    build:
+      context: ${REACT_FOLDER}
+      dockerfile: ./Dockerfile
+    volumes: 
+      - ${REACT_FOLDER}/:/app/
+    ports: 
+      - 3000:3000
+    links:
+      - pg-api
+    restart: unless-stopped 
+    depends_on:
+      - pg-api
+    networks: 
+      - pg-network
 
 
 networks: 
