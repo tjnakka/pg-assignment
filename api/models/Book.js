@@ -23,6 +23,11 @@ module.exports = {
 			description: this.description,
 			author: this.author,
 			review_count: this?.reviews.length,
+			average_rating: this?.reviews
+				? this.reviews.reduce((preval, currval) => {
+						return preval + currval.rating
+				  }, 0) / this.reviews.length
+				: null,
 		}
 	},
 }
