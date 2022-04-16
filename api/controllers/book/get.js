@@ -1,13 +1,12 @@
 module.exports = async function getBooks(req, res) {
-	let books = []
+	let query = {}
 
 	if (req.query?.id) {
-		books = await Book.find({
+		query = {
 			id: req.query.id,
-		})
-	} else {
-		books = await Book.find()
+		}
 	}
 
+	let books = await Book.find(query).populate('reviews')
 	res.status(200).json(books)
 }

@@ -16,4 +16,13 @@ module.exports = {
 			via: 'book',
 		},
 	},
+	customToJSON: function () {
+		return {
+			id: this.id,
+			name: this.name,
+			description: this.description,
+			author: this.author,
+			review_count: this?.reviews.length,
+		}
+	},
 }

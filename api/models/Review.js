@@ -14,4 +14,11 @@ module.exports = {
 			model: 'book',
 		},
 	},
+	customToJSON: function () {
+		return {
+			id: this.id,
+			name: this.body,
+			rating: this.rating,
+		}
+	},
 }
