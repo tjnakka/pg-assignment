@@ -1,0 +1,60 @@
+version: '3.6'
+
+services: 
+  pg-db:
+    container_name: pg-db
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root@123456
+      - MYSQL_DATABASE=peoplegroove
+      - MYSQL_USER=pguser
+      - MYSQL_PASSWORD=pg123456
+    volumes: 
+      - ${MYSQL_DATA_FOLDER}:/var/lib/mysql/
+      - ${SAILS_FOLDER}/docker/:/etc/mysql/conf.d
+    ports:
+      - 3308:3306
+    networks: 
+      - pg-network
+
+  pg-api:
+    container_name: pg-api
+    build:
+      context: ${SAILS_FOLDER}
+      dockerfile: ./docker/Dockerfile
+    volumes: 
+      - ${SAILS_FOLDER}/:/app/
+    environment:
+      - environment=dev
+    ports: 
+      - 1337:1337
+    links:
+      - pg-db
+    restart: unless-stopped 
+    depends_on:
+      - pg-db
+    networks: 
+      - pg-network
+
+  pg-ui:
+    container_name: pg-ui
+    build:
+      context: ${REACT_FOLDER}
+      dockerfile: ./Dockerfile
+    volumes: 
+      - ${REACT_FOLDER}/:/app/
+    ports: 
+      - 3000:3000
+    links:
+      - pg-api
+    restart: unless-stopped 
+    depends_on:
+      - pg-api
+    networks: 
+      - pg-network
+
+
+networks: 
+  pg-network:
+    name: pg-network
+    driver: bridge
