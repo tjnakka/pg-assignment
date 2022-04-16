@@ -17,7 +17,7 @@ module.exports = {
 	customToJSON: function () {
 		return {
 			id: this.id,
-			name: this.body,
+			body: this.body,
 			rating: this.rating,
 		}
 	},
